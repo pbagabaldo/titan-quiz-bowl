@@ -13,7 +13,7 @@ export default function Music() {
 
       <main className={styles.main}>
         <h1>
-            Hello World!
+            Hello World
         </h1>
       </main>
 
