@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -17,30 +18,21 @@ export default function Home() {
         </h1>
 
         <div className={styles.grid}>
-          <a href="/posts/music" className={styles.card}>
+          <Link href="/posts/music" className={styles.card}/>
             <h2>Music &rarr;</h2>
-          </a>
 
-          <a href="/posts/geography" className={styles.card}>
+          <Link href="/posts/geography" className={styles.card}/>
             <h2>Geography &rarr;</h2>
-          </a>
 
-          <a
-            href="/posts/history"
-            className={styles.card}
-          >
+          <Link href="/posts/history" className={styles.card}/>
             <h2>History &rarr;</h2>
-          </a>
 
-          <a
-            href="/posts/general"
-            className={styles.card}
-          >
+          <Link href="/posts/general" className={styles.card}/>
             <h2>General &rarr;</h2>
-          </a>
-          <a href="/posts/setting" className={styles.card}>
+
+          <Link href="/posts/setting" className={styles.card}/>
             <h2>Settings &rarr;</h2>
-          </a>
+            
         </div>
       </main>
 
