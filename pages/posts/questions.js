@@ -109,7 +109,7 @@ var Musicquestions=[
         },
         correctAnswer: 'a'
     }
-]
+];
 
 
 var Geographyquestions=[
