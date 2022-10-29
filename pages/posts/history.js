@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
+import Router from 'next/router'
 
 export default function Music() {
   return (
@@ -15,6 +16,13 @@ export default function Music() {
         <h1>
             Hello World!
         </h1>
+        {/* Back to home screen*/}
+        <a className={styles.card}> 
+            <div onClick={() => Router.back()}> 
+              <h2>Home Screen</h2> 
+            </div> 
+           </a>
+
       </main>
 
       <footer className={styles.footer}>
