@@ -8,6 +8,7 @@ body {
 
 a {
   color: inherit;
+  border: 1 px solid Black;
   text-decoration: none;
 }
 
