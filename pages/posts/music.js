@@ -139,7 +139,7 @@ export default function Music() {
     <div className="App">
       {/* 1. Header  */}
       <h1 className={styles.title}>
-      MusicQuestions
+      Music Questions
       </h1>
       {/* 3. Show results or show the question game  */}
       player1score: {score} <center>player2score: {score}</center>
@@ -185,6 +185,13 @@ export default function Music() {
            </a>
         </main>
       )}
+      <footer className={styles.footer}>
+        <a>
+          Titan-Quiz-Bowl
+          <span className={styles.logo}>
+          </span>
+        </a>
+      </footer>
     </div>
   );
 }
