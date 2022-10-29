@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from '../../styles/Home.module.css'
 import ConfettiGenerator from 'confetti-js'
+import Router from 'next/router'
 
 export default function Music() {
 
@@ -176,6 +177,12 @@ export default function Music() {
               );
             })}
         </div>
+        {/* Back to home screen*/}
+        <a className={styles.card}> 
+            <div onClick={() => Router.back()}> 
+              <h2>Home Screen</h2> 
+            </div> 
+           </a>
         </main>
       )}
     </div>
