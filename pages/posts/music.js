@@ -1,14 +1,14 @@
-
 import React, { useState } from "react";
-import styles from '../../styles/Home.module.css'
-import ConfettiGenerator from 'confetti-js'
-import Router from 'next/router'
+import styles from "../../styles/Home.module.css";
+import ConfettiGenerator from "confetti-js";
+import Router from "next/router";
 
 export default function Music() {
-
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const [playerOneScore, setScoreOne] = useState(0);
+  const [playerTwoScore, setScoreTwo] = useState(0);
   const [playerTurn, setCurrentPlayer] = useState(0);
 
   const questions = [
@@ -17,7 +17,7 @@ export default function Music() {
       options: [
         { Answer: 0, text: "Circle", isCorrect: false },
         { Answer: 1, text: "Square", isCorrect: false },
-        { Answer: 2, text: "Triangle", isCorrect: true},
+        { Answer: 2, text: "Triangle", isCorrect: true },
         { Answer: 3, text: "Hexagon", isCorrect: false },
       ],
     },
@@ -25,7 +25,7 @@ export default function Music() {
       text: "The flute is a member of the ___.",
       options: [
         { Answer: 0, text: "Brass Family", isCorrect: false },
-        { Answer: 1, text: "Woodwind Family", isCorrect: true},
+        { Answer: 1, text: "Woodwind Family", isCorrect: true },
         { Answer: 2, text: "Percussion Family", isCorrect: false },
         { Answer: 3, text: "String Family", isCorrect: false },
       ],
@@ -62,7 +62,7 @@ export default function Music() {
       options: [
         { Answer: 0, text: "Piano", isCorrect: false },
         { Answer: 1, text: "Brass Guitar", isCorrect: false },
-        { Answer: 2, text: "Drums", isCorrect: true},
+        { Answer: 2, text: "Drums", isCorrect: true },
         { Answer: 3, text: "Harp", isCorrect: false },
       ],
     },
@@ -70,13 +70,13 @@ export default function Music() {
       text: "Which of the following describes playing a poece of music alone?",
       options: [
         { Answer: 0, text: "Duet", isCorrect: false },
-        { Answer: 1, text: "Solo", isCorrect: true},
+        { Answer: 1, text: "Solo", isCorrect: true },
         { Answer: 2, text: "Symphony", isCorrect: false },
         { Answer: 3, text: "Quartet", isCorrect: false },
       ],
     },
     {
-      text:"In an Orchestra who directs the musicians?" ,
+      text: "In an Orchestra who directs the musicians?",
       options: [
         { Answer: 0, text: "The Conductor", isCorrect: true },
         { Answer: 1, text: "The Manager", isCorrect: false },
@@ -106,27 +106,30 @@ export default function Music() {
   const optionClicked = (isCorrect) => {
     // Increment the score
     if (isCorrect && currentQuestion + 1 < questions.length) {
-      let correct = new Audio ("/New Recording 13.m4a");
+      let correct = new Audio("/New Recording 13.m4a");
       correct.play();
-      
 
-      setTimeout(function() {
-      setScore(score + 1);
-      setCurrentQuestion(currentQuestion + 1);
+      setTimeout(function () {
+        if (playerTurn % 2 == 0) {
+          setScoreOne(playerOneScore + 1);
+        } else {
+          setScoreTwo(playerTwoScore + 1);
+        }
+
+        setScore(score + 1);
+        setCurrentPlayer(playerTurn + 1);
+
+        setCurrentQuestion(currentQuestion + 1);
       }, 3000);
-    }
-    else if (!isCorrect) {
-      let myAudio = new Audio ("/New-Recording-12.mp3");
+    } else if (!isCorrect) {
+      let myAudio = new Audio("/New-Recording-12.mp3");
       myAudio.play();
       setCurrentPlayer(playerTurn + 1);
       setCurrentQuestion(currentQuestion);
-    }
-      else {
+    } else {
       setShowResults(true);
     }
   };
-
-
 
   /* Resets the game back to default */
   const restartGame = () => {
@@ -138,11 +141,15 @@ export default function Music() {
   return (
     <div className="App">
       {/* 1. Header  */}
-      <h1 className={styles.title}>
-      Music Questions
-      </h1>
+      <h1 className={styles.title}>Music Questions</h1>
       {/* 3. Show results or show the question game  */}
-      player1score: {score} <center>player2score: {score}</center>
+      <div className="">
+        player1score: {playerOneScore}{" "}
+      </div>
+      <div>
+        player2score: {playerTwoScore}
+      </div>
+      
       {showResults ? (
         /* 4. Final Results */
         <div className="final-results">
@@ -152,23 +159,30 @@ export default function Music() {
             {(score / questions.length) * 100}%)
           </h2>
           <button onClick={() => restartGame()}>Restart game</button>
+          <a className={styles.card}>
+            <div onClick={() => Router.back()}>
+              <h2>Home Screen</h2>
+            </div>
+          </a>
         </div>
       ) : (
         /* 5. Question Card  */
         <main className={styles.main}>
-         <div className={styles.grid}>
-          {/* Current Question  */}
-          <h1>
-            Question: {currentQuestion + 1} out of {questions.length}
-          </h1>
+          <div className={styles.grid}>
+            {/* Current Question  */}
+            <h1 className={styles.questions}>
+              Question: {currentQuestion + 1} out of {questions.length}
+            </h1>
+            <br />
+            <h1 className={styles.questions}>
+              {questions[currentQuestion].text}
+            </h1>
 
-          <h1>{questions[currentQuestion].text}</h1>
-
-          {/* List of possible answers  */}
+            {/* List of possible answers  */}
             {questions[currentQuestion].options.map((option) => {
               return (
-
-                <a className={styles.card}
+                <a
+                  className={styles.card}
                   key={option.Answer}
                   onClick={() => optionClicked(option.isCorrect)}
                 >
@@ -176,23 +190,21 @@ export default function Music() {
                 </a>
               );
             })}
-        </div>
-        {/* Back to home screen*/}
-        <a className={styles.card}> 
-            <div onClick={() => Router.back()}> 
-              <h2>Home Screen</h2> 
-            </div> 
-           </a>
+          </div>
+          {/* Back to home screen*/}
+          <a className={styles.card}>
+            <div onClick={() => Router.back()}>
+              <h2>Home Screen</h2>
+            </div>
+          </a>
         </main>
       )}
       <footer className={styles.footer}>
         <a>
           Titan-Quiz-Bowl
-          <span className={styles.logo}>
-          </span>
+          <span className={styles.logo}></span>
         </a>
       </footer>
     </div>
   );
 }
-
