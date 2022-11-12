@@ -106,7 +106,7 @@ export default function Geography() {
     ];
 
     const optionClicked = (isCorrect) => {
-    if (isCorrect && currentQuestion + 1 < questions.length) {
+    if (isCorrect && currentQuestion < questions.length) {
       let correct = new Audio("/New Recording 13.m4a");
       correct.play();
 
@@ -122,13 +122,14 @@ export default function Geography() {
 
         setCurrentQuestion(currentQuestion + 1);
       }, 3000);
+      if(currentQuestion==questions.length){
+        setShowResults(true);
+      }
     } else if (!isCorrect) {
       let myAudio = new Audio("/New-Recording-12.mp3");
       myAudio.play();
       setCurrentPlayer(playerTurn + 1);
       setCurrentQuestion(currentQuestion);
-    } else {
-      setShowResults(true);
     }
 
     if(playerTurn%2==1){
@@ -162,7 +163,7 @@ export default function Geography() {
       <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
         player2score: {playerTwoScore}
       </div>
-        {showResults ? (
+        {currentQuestion==10 ? (
           /* 4. Final Results */
           <div className="final-results">
             <h1>Final Results</h1>
