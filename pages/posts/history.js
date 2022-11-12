@@ -8,6 +8,8 @@ export default function History() {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const [playerOneScore, setScoreOne] = useState(0);
+  const [playerTwoScore, setScoreTwo] = useState(0);
   const [playerTurn, setCurrentPlayer] = useState(0);
 
   const questions = [
@@ -103,25 +105,40 @@ export default function History() {
     },
   ];
   const optionClicked = (isCorrect) => {
+
+    
     // Increment the score
     if (isCorrect && currentQuestion + 1 < questions.length) {
-      let correct = new Audio ("/New Recording 13.m4a");
+      let correct = new Audio("/New Recording 13.m4a");
       correct.play();
-      
 
-      setTimeout(function() {
-      setScore(score + 1);
-      setCurrentQuestion(currentQuestion + 1);
+      setTimeout(function () {
+        if (playerTurn % 2 == 0) {
+          setScoreOne(playerOneScore + 1);
+        } else {
+          setScoreTwo(playerTwoScore + 1);
+        }
+
+        setScore(score + 1);
+        setCurrentPlayer(playerTurn + 1);
+
+        setCurrentQuestion(currentQuestion + 1);
       }, 3000);
-    }
-    else if (!isCorrect) {
-      let myAudio = new Audio ("/New-Recording-12.mp3");
+    } else if (!isCorrect) {
+      let myAudio = new Audio("/New-Recording-12.mp3");
       myAudio.play();
       setCurrentPlayer(playerTurn + 1);
       setCurrentQuestion(currentQuestion);
-    }
-      else {
+    } else {
       setShowResults(true);
+    }
+
+    if(playerTurn%2==1){
+      document.getElementById("player1score").style.backgroundColor = "red"
+      document.getElementById("player2score").style.backgroundColor = "black"
+    } else{
+      document.getElementById("player2score").style.backgroundColor = "red"
+      document.getElementById("player1score").style.backgroundColor = "black"
     }
   };
 
@@ -141,7 +158,13 @@ export default function History() {
       History Questions
       </h1>
       {/* 3. Show results or show the question game  */}
-      player1score: {score} <center>player2score: {score}</center>
+      <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
+        player1score: {playerOneScore}{" "}
+      </div>
+      <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
+        player2score: {playerTwoScore}
+      </div>
+      
       {showResults ? (
         /* 4. Final Results */
         <div className="final-results">

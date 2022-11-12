@@ -16,7 +16,8 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to Titan Quiz Bowl!
         </h1>
-
+        <br/>
+        <br/>
         <div className={styles.grid}>
           <Link href="/posts/music" > 
             <a className={styles.card}> <h2>Music &rarr;</h2> </a>
