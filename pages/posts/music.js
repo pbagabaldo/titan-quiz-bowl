@@ -104,6 +104,8 @@ export default function Music() {
     },
   ];
   const optionClicked = (isCorrect) => {
+
+    
     // Increment the score
     if (isCorrect && currentQuestion + 1 < questions.length) {
       let correct = new Audio("/New Recording 13.m4a");
@@ -129,6 +131,14 @@ export default function Music() {
     } else {
       setShowResults(true);
     }
+
+    if(playerTurn%2==1){
+      document.getElementById("player1score").style.backgroundColor = "red"
+      document.getElementById("player2score").style.backgroundColor = "white"
+    } else{
+      document.getElementById("player2score").style.backgroundColor = "red"
+      document.getElementById("player1score").style.backgroundColor = "white"
+    }
   };
 
   /* Resets the game back to default */
@@ -143,12 +153,14 @@ export default function Music() {
       {/* 1. Header  */}
       <h1 className={styles.title}>Music Questions</h1>
       {/* 3. Show results or show the question game  */}
-      <div className="">
+      <div id="player1score" style={{ backgroundColor: 'red', color: 'black'}}>
         player1score: {playerOneScore}{" "}
       </div>
-      <div>
+      <div id="player2score" style={{ backgroundColor: 'white', color: 'black'}}>
         player2score: {playerTwoScore}
       </div>
+
+      
       
       {showResults ? (
         /* 4. Final Results */
