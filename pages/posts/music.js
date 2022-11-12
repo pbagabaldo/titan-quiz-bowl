@@ -134,10 +134,10 @@ export default function Music() {
 
     if(playerTurn%2==1){
       document.getElementById("player1score").style.backgroundColor = "red"
-      document.getElementById("player2score").style.backgroundColor = "white"
+      document.getElementById("player2score").style.backgroundColor = "black"
     } else{
       document.getElementById("player2score").style.backgroundColor = "red"
-      document.getElementById("player1score").style.backgroundColor = "white"
+      document.getElementById("player1score").style.backgroundColor = "black"
     }
   };
 
@@ -153,10 +153,10 @@ export default function Music() {
       {/* 1. Header  */}
       <h1 className={styles.title}>Music Questions</h1>
       {/* 3. Show results or show the question game  */}
-      <div id="player1score" style={{ backgroundColor: 'red', color: 'black'}}>
+      <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
         player1score: {playerOneScore}{" "}
       </div>
-      <div id="player2score" style={{ backgroundColor: 'white', color: 'black'}}>
+      <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
         player2score: {playerTwoScore}
       </div>
 
@@ -183,7 +183,7 @@ export default function Music() {
           <div className={styles.grid}>
             {/* Current Question  */}
             <h1 className={styles.questions}>
-              Question: {currentQuestion + 1} out of {questions.length}
+              Question {currentQuestion + 1} out of {questions.length}:
             </h1>
             <br />
             <h1 className={styles.questions}>
