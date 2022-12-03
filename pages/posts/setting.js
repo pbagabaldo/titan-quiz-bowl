@@ -6,10 +6,12 @@ import { useState } from 'react'
 
 export default function Settings() {
 
-  const [name,setName] = useState('_______')
+  const [name1,setName1] = useState("Player1")
+  const [name2,setName2] = useState("Player2")
 
   const handleClick = () => {
-    setName("Tuffy")
+    setName1("Tuffy")
+    setName2("Titan")
   }
 
   return (
@@ -23,7 +25,7 @@ export default function Settings() {
         <h1 className={styles.title}>  
             Settings
         </h1>
-        <h2> Welcome to the settings page, {name}!</h2>
+        <h2> Welcome to the settings page, {name1} and {name2}!</h2>
         
         <div className={styles.grid}>
           {/* Change name */}
