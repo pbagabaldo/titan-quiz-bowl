@@ -32,7 +32,7 @@ export default function Geography() {
         ],
       },
       {
-        text: "Which is the biggest continent?",
+        text: "What is the largest continent in the world?",
         options: [
           { Answer: 0, text: "Africa", isCorrect: false },
           { Answer: 1, text: "Europe", isCorrect: false },

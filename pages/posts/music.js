@@ -3,6 +3,7 @@ import styles from "../../styles/Home.module.css";
 import ConfettiGenerator from "confetti-js";
 import Router from "next/router";
 
+
 export default function Music() {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -10,6 +11,7 @@ export default function Music() {
   const [playerOneScore, setScoreOne] = useState(0);
   const [playerTwoScore, setScoreTwo] = useState(0);
   const [playerTurn, setCurrentPlayer] = useState(0);
+  
 
   const questions = [
     {
@@ -67,7 +69,7 @@ export default function Music() {
       ],
     },
     {
-      text: "Which of the following describes playing a poece of music alone?",
+      text: "Which of the following describes playing a piece of music alone?",
       options: [
         { Answer: 0, text: "Duet", isCorrect: false },
         { Answer: 1, text: "Solo", isCorrect: true },
@@ -154,10 +156,10 @@ export default function Music() {
       <h1 className={styles.title}>Music Questions</h1>
       {/* 3. Show results or show the question game  */}
       <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
-        player1score: {playerOneScore}{" "}
+        Player1: {playerOneScore}{" "}
       </div>
       <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
-        player2score: {playerTwoScore}
+        Player2: {playerTwoScore}
       </div>
 
       
