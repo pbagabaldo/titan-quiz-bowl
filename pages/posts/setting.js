@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-
 export default function Settings() {
 
   const [name1,setName1] = useState("Player1")
@@ -81,7 +80,7 @@ export default function Settings() {
 
       <footer className={styles.footer}>
         <a>
-        Titan Quiz Bowl 2022 (Group 1: Joel, Jonathan, Jesus, Paul)
+          Titan Quiz Bowl 2022
         </a>
       </footer>
     </div>
