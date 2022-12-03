@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import styles from "../../styles/Home.module.css";
-import ConfettiGenerator from "confetti-js";
 import Router from "next/router";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Music() {
   const [showResults, setShowResults] = useState(false);
@@ -150,20 +159,36 @@ export default function Music() {
     setShowResults(false);
   };
 
+  
+
   return (
     <div className="App">
       {/* 1. Header  */}
       <h1 className={styles.title}>Music Questions</h1>
+      <Grid container spacing={10} columns={16}>
+        <Grid item xs={8}>
+          <Item>
+            <div
+              id="player1score"
+              style={{ backgroundColor: "red", color: "white" }}
+            >
+              Player1: {playerOneScore}{" "}
+            </div>
+          </Item>
+        </Grid>
+        <Grid item xs={8}>
+          <Item>
+            <div
+              id="player2score"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Player2: {playerTwoScore}
+            </div>
+          </Item>
+        </Grid>
+      </Grid>
       {/* 3. Show results or show the question game  */}
-      <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
-        Player1: {playerOneScore}{" "}
-      </div>
-      <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
-        Player2: {playerTwoScore}
-      </div>
 
-      
-      
       {showResults ? (
         /* 4. Final Results */
         <div className="final-results">
