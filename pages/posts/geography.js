@@ -1,8 +1,17 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
 import Router from 'next/router'
 import React, { useState } from "react";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Geography() {
   const [showResults, setShowResults] = useState(false);
@@ -153,25 +162,43 @@ export default function Geography() {
     return (
       <div className="App">
         {/* 1. Header  */}
-        <h1 className={styles.title}>
-        Geography Questions
-        </h1>
+        <h1 className={styles.title}>Geography Questions</h1>
         {/* 3. Show results or show the question game  */}
-        <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
-        player1score: {playerOneScore}{" "}
-      </div>
-      <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
-        player2score: {playerTwoScore}
-      </div>
-        {currentQuestion==10 ? (
+        <Grid container spacing={10} columns={16}>
+          <Grid item xs={8}>
+            <Item>
+              <div
+                id="player1score"
+                style={{ backgroundColor: "red", color: "white" }}
+              >
+                Player1: {playerOneScore}{" "}
+              </div>
+            </Item>
+          </Grid>
+          <Grid item xs={8}>
+            <Item>
+              <div
+                id="player2score"
+                style={{ backgroundColor: "black", color: "white" }}
+              >
+                Player2: {playerTwoScore}
+              </div>
+            </Item>
+          </Grid>
+        </Grid>
+        {currentQuestion == 10 ? (
           /* 4. Final Results */
           <div className="final-results">
             <h1>Final Results</h1>
-            <h2> Player One: 
+            <h2>
+              {" "}
+              Player One:
               {playerOneScore} out of {questions.length} correct - (
               {(playerOneScore / questions.length) * 100}%)
             </h2>
-            <h2> Player Two: 
+            <h2>
+              {" "}
+              Player Two:
               {playerTwoScore} out of {questions.length} correct - (
               {(playerTwoScore / questions.length) * 100}%)
             </h2>
@@ -180,19 +207,19 @@ export default function Geography() {
         ) : (
           /* 5. Question Card  */
           <main className={styles.main}>
-           <div className={styles.grid}>
-            {/* Current Question  */}
-            <h1>
-              Question: {currentQuestion + 1} out of {questions.length}
-            </h1>
-            <br/>
-            <h1>{questions[currentQuestion].text}</h1>
-  
-            {/* List of possible answers  */}
+            <div className={styles.grid}>
+              {/* Current Question  */}
+              <h1>
+                Question: {currentQuestion + 1} out of {questions.length}
+              </h1>
+              <br />
+              <h1>{questions[currentQuestion].text}</h1>
+
+              {/* List of possible answers  */}
               {questions[currentQuestion].options.map((option) => {
                 return (
-  
-                  <a className={styles.card}
+                  <a
+                    className={styles.card}
                     key={option.Answer}
                     onClick={() => optionClicked(option.isCorrect)}
                   >
@@ -200,22 +227,21 @@ export default function Geography() {
                   </a>
                 );
               })}
-          </div>
-          {/* Back to home screen*/}
-          <a className={styles.card}> 
-              <div onClick={() => Router.back()}> 
-                <h2>Home Screen</h2> 
-              </div> 
-             </a>
+            </div>
+            {/* Back to home screen*/}
+            <a className={styles.card}>
+              <div onClick={() => Router.back()}>
+                <h2>Home Screen</h2>
+              </div>
+            </a>
           </main>
         )}
         <footer className={styles.footer}>
-        <a>
-          Titan-Quiz-Bowl
-          <span className={styles.logo}>
-          </span>
-        </a>
-      </footer>
+          <a>
+            Titan-Quiz-Bowl
+            <span className={styles.logo}></span>
+          </a>
+        </footer>
       </div>
     );
 }
