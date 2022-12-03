@@ -1,8 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../../styles/Home.module.css'
-import Router from 'next/router'
+import {name1, name2} from './setting';
 import React, { useState } from "react";
+import styles from "../../styles/Home.module.css";
+import Router from "next/router";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function General() {
   const [showResults, setShowResults] = useState(false);
@@ -158,12 +170,28 @@ export default function General() {
         General Questions
         </h1>
         {/* 3. Show results or show the question game  */}
-        <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
-        player1score: {playerOneScore}{" "}
-      </div>
-      <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
-        player2score: {playerTwoScore}
-      </div>
+        <Grid container spacing={10} columns={16}>
+        <Grid item xs={8}>
+          <Item>
+            <div
+              id="player1score"
+              style={{ backgroundColor: "red", color: "white" }}
+            >
+              Player1: {playerOneScore}{" "}
+            </div>
+          </Item>
+        </Grid>
+        <Grid item xs={8}>
+          <Item>
+            <div
+              id="player2score"
+              style={{ backgroundColor: "black", color: "white" }}
+            >
+              Player2: {playerTwoScore}
+            </div>
+          </Item>
+        </Grid>
+      </Grid>
 
 
         {showResults ? (
