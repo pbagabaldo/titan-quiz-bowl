@@ -188,13 +188,6 @@ export default function Music() {
           </Item>
         </Grid>
       </Grid>
-      {/* 3. Show results or show the question game  */}
-      <div id="player1score" style={{ backgroundColor: 'red', color: 'white'}}>
-        Player1: {playerOneScore}{" "}
-      </div>
-      <div id="player2score" style={{ backgroundColor: 'black', color: 'white'}}>
-        Player2: {playerTwoScore}
-      </div>
 
       {showResults ? (
         /* 4. Final Results */
